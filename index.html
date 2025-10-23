@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JimbonShop</title>
+
+    <!-- CSS langsung disini -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #ff5e00;
+            color: #fff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        button {
+            background: #ff5e00;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #e34f00;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>JimbonShop</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Login</a>
+            <a href="#" id="cart-btn">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <section class="products" id="product-list">
+        <!-- Produk ditambahkan lewat JavaScript -->
+    </section>
+
+    <!-- JavaScript langsung disini -->
+    <script>
+        const products = [
+            { id: 1, name: "Produk 1", price: 25000, img: "https://via.placeholder.com/150" },
+            { id: 2, name: "Produk 2", price: 40000, img: "https://via.placeholder.com/150" },
+            { id: 3, name: "Produk 3", price: 30000, img: "https://via.placeholder.com/150" },
+            { id: 4, name: "Produk 4", price: 20000, img: "https://via.placeholder.com/150" },
+            { id: 5, name: "Produk 5", price: 45000, img: "https://via.placeholder.com/150" },
+            { id: 6, name: "Produk 6", price: 50000, img: "https://via.placeholder.com/150" },
+            { id: 7, name: "Produk 7", price: 15000, img: "https://via.placeholder.com/150" },
+            { id: 8, name: "Produk 8", price: 35000, img: "https://via.placeholder.com/150" },
+        ];
+
+        let cart = [];
+
+        function displayProducts() {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = products.map(product => `
+                <div class="product">
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Rp ${product.price.toLocaleString()}</p>
+                    <button onclick="addToCart(${product.id})">Tambah ke Keranjang</button>
+                </div>
+            `).join("");
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            document.getElementById('cart-count').innerText = cart.length;
+            alert(product.name + " berhasil dimasukkan ke keranjang!");
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>
